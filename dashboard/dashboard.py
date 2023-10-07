@@ -25,7 +25,7 @@ st.sidebar.markdown(
     unsafe_allow_html=True
 )
 
-all_df = pd.read_csv('all.csv')
+all_df = pd.read_csv('https://raw.githubusercontent.com/nabilakarimaazka/final_project/main/dashboard/all.csv')
 rfm = pd.read_csv('rfm_.csv')
 
 # Hitung KPI dari data Anda
