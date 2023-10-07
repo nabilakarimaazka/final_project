@@ -5,7 +5,7 @@ import pandas as pd
 st.sidebar.markdown(
     """
     <div class="sidebar-header">
-        <h1 style="text-align:center;margin-top:0;">Dashboard RFM Analysis</h1>
+        <h1 style="text-align:center;margin-top:0;">Key Performance Indicator</h1>
     </div>
     """,
     unsafe_allow_html=True
