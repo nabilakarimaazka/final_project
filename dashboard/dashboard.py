@@ -26,7 +26,7 @@ st.sidebar.markdown(
 )
 
 all_df = pd.read_csv('https://raw.githubusercontent.com/nabilakarimaazka/final_project/main/dashboard/all.csv')
-rfm = pd.read_csv('rfm_.csv')
+rfm = pd.read_csv('https://raw.githubusercontent.com/nabilakarimaazka/final_project/main/data/rfm_.csv')
 
 # Hitung KPI dari data Anda
 total_revenue = all_df['price'].sum()
