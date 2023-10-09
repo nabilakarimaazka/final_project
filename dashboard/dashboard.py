@@ -70,18 +70,18 @@ import seaborn as sns
 
 # jumlah order per bulan
 def create_monthly_orders_df(df):
-    mothly_orders_df = df.resample(rule='M', on='order_purchase_timestamp').agg({
+    monthly_orders_df = df.resample(rule='M', on='order_purchase_timestamp').agg({
         "order_id": "nunique",
         "price": "sum"
     })
 
-    mothly_orders_df = mothly_orders_df.reset_index()
-    mothly_orders_df.rename(columns={
+    monthly_orders_df = monthly_orders_df.reset_index()
+    monthly_orders_df.rename(columns={
         "order_id": "order_count",
         "price": "revenue"
     }, inplace=True)
     
-    return mothly_orders_df
+    return monthly_orders_df
 
 # jumlah customer berdasarkan city
 def create_bycity_df(df):
@@ -160,7 +160,7 @@ for column in datetime_columns:
 min_date = all_df["order_purchase_timestamp"].min()
 max_date = all_df["order_purchase_timestamp"].max()
 
-mothly_orders_df = create_mothly_orders_df(all_df)
+monthly_orders_df = create_monthly_orders_df(all_df)
 bycity_df = create_bycity_df(all_df)
 bystate_df = create_bystate_df(all_df)
 sum_order_items_df = create_sum_order_items_df(all_df)
