@@ -8,3 +8,6 @@
 
 ## Run Streamlit App
     streamlit run dashboard.py
+
+## Link Dashboard yang Sudah di Deploy
+    https://finalproject-2iog6vsutglhbotgtytfmi.streamlit.app/
