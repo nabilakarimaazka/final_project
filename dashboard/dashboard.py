@@ -70,19 +70,19 @@ from babel.numbers import format_currency
 
 
 # jumlah order per bulan
-def create_daily_orders_df(df):
-    daily_orders_df = df.resample(rule='M', on='order_purchase_timestamp').agg({
+def create_monthly_orders_df(df):
+    mothly_orders_df = df.resample(rule='M', on='order_purchase_timestamp').agg({
         "order_id": "nunique",
         "price": "sum"
     })
 
-    daily_orders_df = daily_orders_df.reset_index()
-    daily_orders_df.rename(columns={
+    mothly_orders_df = mothly_orders_df.reset_index()
+    mothly_orders_df.rename(columns={
         "order_id": "order_count",
         "price": "revenue"
     }, inplace=True)
     
-    return daily_orders_df
+    return mothly_orders_df
 
 # jumlah customer berdasarkan city
 def create_bycity_df(df):
@@ -161,7 +161,7 @@ for column in datetime_columns:
 min_date = all_df["order_purchase_timestamp"].min()
 max_date = all_df["order_purchase_timestamp"].max()
 
-daily_orders_df = create_daily_orders_df(all_df)
+mothly_orders_df = create_mothly_orders_df(all_df)
 bycity_df = create_bycity_df(all_df)
 bystate_df = create_bystate_df(all_df)
 sum_order_items_df = create_sum_order_items_df(all_df)
@@ -171,12 +171,12 @@ segment_df = create_segment_df(rfm)
 
 
 st.header('E-commerce Analysis Dashboard :sparkles:')
-st.subheader('Monthly Orders')
+st.subheader('Jumlah Order per Bulan')
 
 fig, ax = plt.subplots(figsize=(16, 8))
 ax.plot(
-    daily_orders_df["order_purchase_timestamp"],
-    daily_orders_df["order_count"],
+    mothly_orders_df["order_purchase_timestamp"],
+    mothly_orders_df["order_count"],
     marker='o', 
     linewidth=2,
     color="#90CAF9"
@@ -186,12 +186,12 @@ ax.tick_params(axis='x', labelsize=15)
  
 st.pyplot(fig)
 
-st.subheader('Monthly Revenue')
+st.subheader('Jumlah Pendapatan per Bulan')
 
 fig, ax = plt.subplots(figsize=(16, 8))
 ax.plot(
-    daily_orders_df["order_purchase_timestamp"],
-    daily_orders_df["revenue"],
+    mothly_orders_df["order_purchase_timestamp"],
+    mothly_orders_df["revenue"],
     marker='o', 
     linewidth=2,
     color="#90CAF9"
@@ -226,7 +226,7 @@ ax[1].tick_params(axis='x', labelsize=30)
 
 st.pyplot(fig)
 
-st.subheader("Best & Worst Performing Product")
+st.subheader("Produk Paling Banyak dan Paling Sedikit Diorder")
  
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(35, 15))
  
@@ -266,7 +266,7 @@ ax.tick_params(axis='x', labelsize=15)
  
 st.pyplot(fig)
 
-st.subheader("Best Customer Based on RFM Parameters")
+st.subheader("Customer Terbaik Berdasarkan Parameter RFM Analysis")
 
 col1, col2 = st.columns(2)
 
@@ -275,7 +275,7 @@ with col1:
     colors = ["#90CAF9", "#90CAF9", "#90CAF9", "#90CAF9", "#90CAF9"]
 
     avg_recency = round(rfm_df.recency.mean(), 1)
-    st.metric("Average Recency (days)", value=avg_recency)
+    st.metric("Rata-rata Recency (hari)", value=avg_recency)
 
     sns.barplot(y="recency", x="cust_id", data=rfm_df.sort_values(by="recency", ascending=True).head(5), palette=colors)
     ax.set_ylabel(None)
@@ -290,7 +290,7 @@ with col2:
     colors = ["#90CAF9", "#90CAF9", "#90CAF9", "#90CAF9", "#90CAF9"]
 
     avg_frequency = round(rfm_df.frequency.mean(), 2)
-    st.metric("Average Frequency", value=avg_frequency)
+    st.metric("Rata-rata Frequency", value=avg_frequency)
 
     sns.barplot( 
     y="frequency", 
@@ -306,8 +306,8 @@ with col2:
 fig, ax = plt.subplots( figsize=(20, 10))
 colors = ["#90CAF9", "#90CAF9", "#90CAF9", "#90CAF9", "#90CAF9"]
 
-avg_frequency = format_currency(rfm_df.monetary.mean(), "AUD", locale='es_CO') 
-st.metric("Average Monetary", value=avg_frequency)
+avg_frequency = format_currency(rfm_df.monetary.mean(), locale='es_CO') 
+st.metric("Rata-rata Monetary", value=avg_frequency)
 
 sns.barplot(y="monetary", x="cust_id", data=rfm_df.sort_values(by="monetary", ascending=False).head(5), palette=colors)
 ax.set_ylabel(None)
@@ -317,7 +317,7 @@ ax.tick_params(axis='y', labelsize=30)
 ax.tick_params(axis='x', labelsize=35)
 st.pyplot(fig)
 
-st.subheader("Customer Segmentation")
+st.subheader("Segmentasi Customer")
 
 fig, ax = plt.subplots(figsize=(20, 10))
     
