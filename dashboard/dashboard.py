@@ -305,7 +305,7 @@ with col2:
 fig, ax = plt.subplots( figsize=(20, 10))
 colors = ["#90CAF9", "#90CAF9", "#90CAF9", "#90CAF9", "#90CAF9"]
 
-avg_frequency = format_currency(rfm_df.monetary.mean(), locale='es_CO') 
+avg_frequency = (rfm_df.monetary.mean(), locale='es_CO') 
 st.metric("Rata-rata Monetary", value=avg_frequency)
 
 sns.barplot(y="monetary", x="cust_id", data=rfm_df.sort_values(by="monetary", ascending=False).head(5), palette=colors)
