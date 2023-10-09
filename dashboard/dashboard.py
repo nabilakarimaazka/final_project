@@ -289,8 +289,8 @@ with col2:
     fig, ax = plt.subplots( figsize=(20, 10))
     colors = ["#90CAF9", "#90CAF9", "#90CAF9", "#90CAF9", "#90CAF9"]
 
-    avg_frequency = rfm_df.frequency.mean()
-    st.metric("Rata-rata Frequency", value=avg_frequency)
+    avg_frequency = avg_frequency = round(rfm_df.frequency.mean(), 2)
+    st.metric("Average Frequency", value=avg_frequency)
 
     sns.barplot( 
     y="frequency", 
