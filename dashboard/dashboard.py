@@ -174,8 +174,8 @@ st.subheader('Jumlah Order per Bulan')
 
 fig, ax = plt.subplots(figsize=(16, 8))
 ax.plot(
-    mothly_orders_df["order_purchase_timestamp"],
-    mothly_orders_df["order_count"],
+    monthly_orders_df["order_purchase_timestamp"],
+    monthly_orders_df["order_count"],
     marker='o', 
     linewidth=2,
     color="#90CAF9"
@@ -189,8 +189,8 @@ st.subheader('Jumlah Pendapatan per Bulan')
 
 fig, ax = plt.subplots(figsize=(16, 8))
 ax.plot(
-    mothly_orders_df["order_purchase_timestamp"],
-    mothly_orders_df["revenue"],
+    monthly_orders_df["order_purchase_timestamp"],
+    monthly_orders_df["revenue"],
     marker='o', 
     linewidth=2,
     color="#90CAF9"
