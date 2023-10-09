@@ -66,6 +66,7 @@ st.sidebar.markdown(
 
 import matplotlib.pyplot as plt
 import seaborn as sns
+from babel.numbers import format_currency
 
 
 # jumlah order per bulan
@@ -305,8 +306,8 @@ with col2:
 fig, ax = plt.subplots( figsize=(20, 10))
 colors = ["#90CAF9", "#90CAF9", "#90CAF9", "#90CAF9", "#90CAF9"]
 
-avg_frequency = (rfm_df.monetary.mean(), locale='es_CO') 
-st.metric("Rata-rata Monetary", value=avg_frequency)
+avg_frequency = format_currency(rfm_df.monetary.mean(), "AUD", locale='es_CO') 
+st.metric("Average Monetary", value=avg_frequency)
 
 sns.barplot(y="monetary", x="cust_id", data=rfm_df.sort_values(by="monetary", ascending=False).head(5), palette=colors)
 ax.set_ylabel(None)
