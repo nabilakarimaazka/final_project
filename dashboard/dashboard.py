@@ -66,7 +66,6 @@ st.sidebar.markdown(
 
 import matplotlib.pyplot as plt
 import seaborn as sns
-import babel
 from babel.numbers import format_currency
 
 
